@@ -282,8 +282,11 @@ def health_check():
     })
 
 
-def run_server(host='127.0.0.1', port=5000, debug=True):
+def run_server(host='0.0.0.0', port=None, debug=False):
     """Run the Flask server."""
+    import os
+    if port is None:
+        port = int(os.environ.get('PORT', 5000))
     logger.info(f"Starting Cloud Gaming Optimizer Web Dashboard on {host}:{port}")
     app.run(host=host, port=port, debug=debug)
 
