@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/health",
+      "dest": "api/health.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "cloud_gaming_optimizer/web_app.py"
     }
