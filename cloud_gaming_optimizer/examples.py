@@ -7,11 +7,8 @@ import time
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from data_collection import NetworkMetricsCollector, SystemMetricsCollector, DataLogger
-from feature_engineering import FeatureTransformer, FeatureScaler
-from models import ModelManager, ModelTrainer
 from optimization_engine import OptimizationRules, GamingOptimizer
 from monitoring import PerformanceMonitor, AlertSystem
-from ui import CLIDashboard
 
 
 def example_basic_optimization():

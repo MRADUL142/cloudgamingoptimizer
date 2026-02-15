@@ -4,11 +4,11 @@ import sys
 import argparse
 import logging
 import time
-import json
 from pathlib import Path
-from datetime import datetime
 
+# Add src and config directories to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
+sys.path.insert(0, str(Path(__file__).parent))
 
 from data_collection import NetworkMetricsCollector, SystemMetricsCollector, DataLogger
 from optimization_engine import OptimizationRules, GamingOptimizer

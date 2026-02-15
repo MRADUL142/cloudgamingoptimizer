@@ -1,11 +1,10 @@
 """Web Application - Flask-based Dashboard for Cloud Gaming Optimizer."""
 
 import sys
-import json
 import logging
 from pathlib import Path
 from datetime import datetime
-from flask import Flask, render_template, jsonify, Response
+from flask import Flask, render_template, jsonify
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))

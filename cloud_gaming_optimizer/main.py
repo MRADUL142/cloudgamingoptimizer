@@ -40,7 +40,6 @@ def run_dashboard_mode(refresh_interval: float = 2):
     # Lazy imports to avoid import-time failures for optional packages
     try:
         from src.data_collection.network_metrics import NetworkMetricsCollector
-        from src.data_collection.network_metrics import NetworkMetricsCollector
         from src.data_collection.system_metrics import SystemMetricsCollector
         from src.optimization_engine.optimizer import GamingOptimizer
         from src.optimization_engine.optimization_rules import OptimizationRules
