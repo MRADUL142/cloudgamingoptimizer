@@ -1,0 +1,12 @@
+2026-02-07 11:47:32,072 - __main__ - INFO - Cloud Gaming Performance Optimizer started - Mode: optimize
+2026-02-07 11:47:32,072 - __main__ - INFO - Running single optimization...
+2026-02-07 11:47:56,305 - src.data_collection.network_metrics - INFO - Ping metrics: {'ping_ms': 27.25, 'jitter_ms': 7.09, 'packet_loss_percent': 0.0, 'min_latency_ms': 21.0, 'max_latency_ms': 36.0}
+2026-02-07 11:47:57,410 - src.data_collection.system_metrics - WARNING - GPUtil not installed, GPU metrics unavailable
+2026-02-07 11:47:57,410 - src.optimization_engine.optimization_rules - INFO - Recommended bitrate: 40 Mbps (latency: 27.25ms, PL: 0.0%)
+2026-02-07 11:47:57,414 - src.optimization_engine.optimizer - INFO - Optimization complete - Resolution: 1440p, FPS: 120, Bitrate: 40Mbps
+2026-02-07 11:49:25,210 - __main__ - INFO - Cloud Gaming Performance Optimizer started - Mode: optimize
+2026-02-07 11:49:25,211 - __main__ - INFO - Running single optimization...
+2026-02-07 11:49:29,577 - src.data_collection.network_metrics - INFO - Ping metrics: {'ping_ms': 38.25, 'jitter_ms': 5.97, 'packet_loss_percent': 0.0, 'min_latency_ms': 34.0, 'max_latency_ms': 47.0}
+2026-02-07 11:49:30,682 - src.data_collection.system_metrics - WARNING - GPUtil not installed, GPU metrics unavailable
+2026-02-07 11:49:30,683 - src.optimization_engine.optimization_rules - INFO - Recommended bitrate: 40 Mbps (latency: 38.25ms, PL: 0.0%)
+2026-02-07 11:49:30,683 - src.optimization_engine.optimizer - INFO - Optimization complete - Resolution: 1440p, FPS: 120, Bitrate: 40Mbps

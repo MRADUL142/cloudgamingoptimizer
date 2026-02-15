@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Performance Optimizer</title>
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <h1>Cloud Gaming Optimizer</h1>
+                </div>
+                <div class="header-status">
+                    <span class="status-indicator" id="connectionStatus">
+                        <i class="fas fa-circle"></i>
+                        <span>Connected</span>
+                    </span>
+                    <span class="last-update" id="lastUpdate">Last update: --</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- System Health Banner -->
+            <div class="health-banner" id="healthBanner">
+                <div class="health-status">
+                    <i class="fas fa-heartbeat"></i>
+                    <span id="healthStatus">System Health: Loading...</span>
+                </div>
+            </div>
+
+            <!-- Network Metrics Section -->
+            <section class="metrics-section">
+                <h2><i class="fas fa-network-wired"></i> Network Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card network">
+                        <div class="metric-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Latency</span>
+                            <span class="metric-value" id="latencyValue">--</span>
+                            <span class="metric-unit">ms</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="latencyBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card network">
+                        <div class="metric-icon">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Jitter</span>
+                            <span class="metric-value" id="jitterValue">--</span>
+                            <span class="metric-unit">ms</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="jitterBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card network">
+                        <div class="metric-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Packet Loss</span>
+                            <span class="metric-value" id="packetLossValue">--</span>
+                            <span class="metric-unit">%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="packetLossBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Network Chart -->
+                <div class="chart-container">
+                    <canvas id="networkChart"></canvas>
+                </div>
+            </section>
+
+            <!-- System Metrics Section -->
+            <section class="metrics-section">
+                <h2><i class="fas fa-desktop"></i> System Metrics</h2>
+                <div class="metrics-grid">
+                    <!-- CPU -->
+                    <div class="metric-card system" id="cpuCard">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <span class="metric-title">CPU</span>
+                            <span class="metric-badge" id="cpuBadge">--</span>
+                        </div>
+                        <div class="metric-main">
+                            <span class="metric-value large" id="cpuValue">--</span>
+                            <span class="metric-unit">%</span>
+                        </div>
+                        <div class="metric-bar large">
+                            <div class="metric-bar-fill" id="cpuBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-details">
+                            <span>Cores: <span id="cpuCores">--</span></span>
+                            <span>Freq: <span id="cpuFreq">--</span> GHz</span>
+                        </div>
+                    </div>
+
+                    <!-- RAM -->
+                    <div class="metric-card system" id="ramCard">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <span class="metric-title">RAM</span>
+                            <span class="metric-badge" id="ramBadge">--</span>
+                        </div>
+                        <div class="metric-main">
+                            <span class="metric-value large" id="ramValue">--</span>
+                            <span class="metric-unit">%</span>
+                        </div>
+                        <div class="metric-bar large">
+                            <div class="metric-bar-fill" id="ramBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-details">
+                            <span>Used: <span id="ramUsed">--</span> GB</span>
+                            <span>Total: <span id="ramTotal">--</span> GB</span>
+                        </div>
+                    </div>
+
+                    <!-- GPU -->
+                    <div class="metric-card system" id="gpuCard">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <span class="metric-title">GPU</span>
+                            <span class="metric-badge" id="gpuBadge">--</span>
+                        </div>
+                        <div class="metric-main">
+                            <span class="metric-value large" id="gpuValue">--</span>
+                            <span class="metric-unit">%</span>
+                        </div>
+                        <div class="metric-bar large">
+                            <div class="metric-bar-fill" id="gpuBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-details">
+                            <span id="gpuName">--</span>
+                            <span>VRAM: <span id="gpuMemory">--</span>%</span>
+                        </div>
+                    </div>
+
+                    <!-- Disk -->
+                    <div class="metric-card system" id="diskCard">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <span class="metric-title">Disk</span>
+                            <span class="metric-badge" id="diskBadge">--</span>
+                        </div>
+                        <div class="metric-main">
+                            <span class="metric-value large" id="diskValue">--</span>
+                            <span class="metric-unit">%</span>
+                        </div>
+                        <div class="metric-bar large">
+                            <div class="metric-bar-fill" id="diskBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-details">
+                            <span>Used: <span id="diskUsed">--</span> GB</span>
+                            <span>Total: <span id="diskTotal">--</span> GB</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Optimization Recommendations -->
+            <section class="optimization-section">
+                <h2><i class="fas fa-magic"></i> Optimization Recommendations</h2>
+                <div class="optimization-grid" id="optimizationPanel">
+                    <div class="optimization-card">
+                        <div class="opt-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="opt-info">
+                            <span class="opt-label">Resolution</span>
+                            <span class="opt-value" id="recResolution">--</span>
+                        </div>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="opt-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="opt-info">
+                            <span class="opt-label">Target FPS</span>
+                            <span class="opt-value" id="recFps">--</span>
+                        </div>
+                    </div>
+                    <div class="optimization-card">
+                        <div class="opt-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="opt-info">
+                            <span class="opt-label">Bitrate</span>
+                            <span class="opt-value" id="recBitrate">--</span>
+                        </div>
+                    </div>
+                    <div class="optimization-card priority">
+                        <div class="opt-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="opt-info">
+                            <span class="opt-label">Priority</span>
+                            <span class="opt-value" id="recPriority">--</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="optimization-reason" id="optReason">
+                    Analyzing current conditions...
+                </div>
+            </section>
+
+            <!-- Alerts Section -->
+            <section class="alerts-section">
+                <h2><i class="fas fa-bell"></i> Alerts <span class="alert-count" id="alertCount">0</span></h2>
+                <div class="alerts-container" id="alertsContainer">
+                    <div class="no-alerts" id="noAlerts">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No active alerts</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Charts -->
+            <section class="charts-section">
+                <h2><i class="fas fa-chart-line"></i> Performance History</h2>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>CPU & RAM Usage</h3>
+                        <canvas id="systemChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Performance Score</h3>
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Cloud Gaming Performance Optimizer &copy; 2024</p>
+            <p class="footer-version">Version 1.0.0</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

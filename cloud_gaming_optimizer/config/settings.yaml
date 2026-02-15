@@ -1,0 +1,91 @@
+# Cloud Gaming Performance Optimizer Configuration
+
+# Network Monitoring Settings
+network:
+  ping_interval: 5  # seconds
+  latency_threshold_poor: 100  # ms
+  latency_threshold_moderate: 50  # ms
+  jitter_threshold: 20  # ms
+  packet_loss_threshold: 5  # %
+  bandwidth_test_interval: 60  # seconds
+
+# System Monitoring Settings
+system:
+  cpu_threshold_high: 85  # %
+  cpu_threshold_critical: 95  # %
+  gpu_threshold_high: 80  # %
+  gpu_threshold_critical: 95  # %
+  ram_threshold_high: 80  # %
+  ram_threshold_critical: 90  # %
+  monitoring_interval: 2  # seconds
+
+# Gaming Settings - Resolution Options
+gaming_settings:
+  resolutions: [1080p, 1440p, 2160p, 4K]
+  fps_options: [30, 60, 120, 144]
+  bitrate_options: [5, 10, 25, 50]  # Mbps
+
+# Optimization Rules
+optimization:
+  latency_to_bitrate:
+    poor: 5
+    moderate: 10
+    good: 25
+    excellent: 50
+  
+  packet_loss_to_bitrate:
+    high: 5
+    moderate: 10
+    low: 25
+  
+  cpu_load_to_fps:
+    high: 30
+    moderate: 60
+    low: 120
+
+# Model Settings
+models:
+  latency_prediction_model: "random_forest"
+  frame_stability_model: "gradient_boosting"
+  bandwidth_optimization_model: "xgboost"
+  train_test_split: 0.8
+  validation_split: 0.1
+
+# Data Collection Settings
+data_collection:
+  raw_logs_dir: "data/raw_logs"
+  processed_data_dir: "data/processed"
+  logs_dir: "logs"
+  retention_days: 30
+  batch_size: 1000
+
+# Server Regions (Example)
+cloud_gaming_servers:
+  regions:
+    - name: "US-East"
+      latency_baseline: 15
+      bandwidth_baseline: 100
+    - name: "US-West"
+      latency_baseline: 20
+      bandwidth_baseline: 100
+    - name: "Europe"
+      latency_baseline: 30
+      bandwidth_baseline: 100
+    - name: "Asia-Pacific"
+      latency_baseline: 50
+      bandwidth_baseline: 100
+
+# Dashboard Settings
+dashboard:
+  host: "127.0.0.1"
+  port: 5000
+  refresh_interval: 2  # seconds
+  history_points: 300  # data points to display
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/optimizer.log"
+  max_file_size: 10485760  # 10MB
+  backup_count: 5
