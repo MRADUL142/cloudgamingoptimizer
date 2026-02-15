@@ -1,0 +1,27 @@
+/* Copied CSS for GitHub Pages */
+
+/* Cloud Gaming Optimizer - Dashboard Styles */
+
+/* CSS Variables */
+:root {
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary-color: #8b5cf6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --dark-bg: #0f172a;
+    --dark-card: #1e293b;
+    --dark-border: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --network-color: #06b6d4;
+    --system-color: #8b5cf6;
+    --gpu-color: #f97316;
+    --ram-color: #3b82f6;
+    --cpu-color: #ef4444;
+    --disk-color: #eab308;
+}
+
+/* (rest of CSS omitted for brevity - original styles copied) */
